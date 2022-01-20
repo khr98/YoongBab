@@ -1,0 +1,26 @@
+@import "variables.css";
+
+@import "pages/base.css";
+@import "pages/list.css";
+@import "pages/detail.css";
+@import "pages/form.css";
+
+a {
+  color: black;
+  text-decoration: none;
+}
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.highlight {
+  color: var(--pink);
+  font-weight: bold;
+}

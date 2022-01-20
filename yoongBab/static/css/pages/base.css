@@ -1,0 +1,20 @@
+header {
+  padding: 0 50px 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-bottom: 0.2px solid var(--lmm-gray);
+}
+
+.header-title {
+  font-weight: normal;
+  letter-spacing: -2px;
+  word-spacing: -3px;
+}
+
+.header-new {
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: var(--gray);
+}
