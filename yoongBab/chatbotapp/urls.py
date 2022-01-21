@@ -5,5 +5,7 @@ app_name='chatbot'
 
 urlpatterns = [
     path('', views.menu_list, name="list"),
-    path('create/', views.menu_create, name="create"),
+    path('create/chaSaDae/', views.menu_create, name="create-chaSaDae"),
+    path('create/nano/', views.menu_create, name="create-nano"),
+    path('create/R-DB/', views.menu_create, name="create-R-DB"),
 ]

@@ -2,26 +2,32 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'css/style.css' %}?after"
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'css/style.css' %}?after"
     />
     <title>YoongBab</title>
-  </head>
-  <body>
-    <header>
-      <h1 class="header-title">
+</head>
+<body>
+<header>
+    <h1 class="header-title">
         <a href="/">My <span class="highlight"></span>Menu</a>
-      </h1>
-      <a href="{% url 'chatbot:create' %}"
-        ><span class="header-new">메뉴 등록</span></a
-      >
-    </header>
-    {% block content %} {% endblock %}
-  </body>
+    </h1>
+    <a href="{% url 'chatbot:create-nano' %}"
+    ><span class="header-new">한국나노기술원</span></a
+    >
+    <a href="{% url 'chatbot:create-chaSaDae' %}"
+    ><span class="header-new">차세대융합</span></a
+    >
+    <a href="{% url 'chatbot:create-R-DB' %}"
+    ><span class="header-new">R&DB</span></a
+    >
+</header>
+{% block content %} {% endblock %}
+</body>
 </html>
