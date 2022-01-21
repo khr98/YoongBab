@@ -19,7 +19,7 @@ from django.urls import path, include
 from chatbotapp import views
 
 urlpatterns = [
-    path('asd/', views.get_chaSeDae),
+    path('asd/', views.get_chaSeDae,name="asd"),
     path('admin/', admin.site.urls),
     path('', include('chatbotapp.urls')),
 ]
