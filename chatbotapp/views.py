@@ -6,10 +6,13 @@ from .form import *
 import json
 
 # Create your views here.
+
+@csrf_exempt
 def menu_list(request):
     menus = ChaSeDae.objects.all();
     return render(request, template_name='menu_list.html', context={'menus':menus})
 
+@csrf_exempt
 def menu_create(request):
     if request.method == 'POST':
         form = MenuForm(request.POST,request.FILES)
@@ -22,6 +25,8 @@ def menu_create(request):
     return render(request, template_name='menu_form.html', context=ctx)
 
 
+
+@csrf_exempt
 def get_chaSeDae(request):
     answer = request.body.decode('utf-8')
     return_json_str = json.loads(answer)
