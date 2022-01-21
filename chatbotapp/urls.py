@@ -8,4 +8,5 @@ urlpatterns = [
     path('create/chaSaDae/', views.menu_create, name="create-chaSaDae"),
     path('create/nano/', views.menu_create, name="create-nano"),
     path('create/R-DB/', views.menu_create, name="create-R-DB"),
+    path('chaSeDae/', views.get_chaSeDae),
 ]
