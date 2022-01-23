@@ -356,3 +356,16 @@ def get_R_DB(request):
         response = makeWeekendReply("경기 RDB", response)
         return JsonResponse(response)
 
+@csrf_exempt
+def get_etc(request):
+    answer = request.body.decode('utf-8')
+    return_json_str = json.loads(answer)
+    return_str = return_json_str['userRequest']['utterance']
+
+    if return_str == "📬건의사항":
+        openurl = "https://open.kakao.com/o/si30eZVd"
+        response = insert_text(
+            "⁉️오류제보 / 기능 건의 ⁉️\n {}\n 링크를 클릭후 \n 편하게 채팅해주세요\n 여러분들의 오류제보가 \n 융밥을 더 성장시킵니다".format(openurl))
+        # reply = make_reply("🏡홈으로", "홈")
+        # answer = insert_replies(answer, reply)
+        return JsonResponse(response)
