@@ -152,7 +152,13 @@ def get_chaSeDae(request):
         response = makeWeekendReply("차세대융합기술원", response)
         print(response)
         return JsonResponse(response)
-        
+
+    elif return_str == "차세대융합기술원문의사항":
+        text = "📪 문의사항 : 우혜림 영양사 [prefla@naver.com] \n" \
+               "031-888-9497 로 연락 바랍니다."
+        response = insert_text(text)
+        response = makeWeekendReply("차세대융합기술원", response)
+        return JsonResponse(response)
 
 
 
@@ -166,13 +172,13 @@ def get_nano(request):
         answer = "더미"
         return JsonResponse(answer)
     elif return_str == "한국나노기술원문의사항":
-        text = "⏰ 운영시간안내\n - 중식 11:30 ~ 13:10\n" \
+        text = "⏰ 운영시간안내\n- 중식 11:30 ~ 13:10\n" \
                "- 석식 17:30 ~ 18:30\n\n" \
-               "📃 상기 식단은 시장 동향에 따라 변경될 수 있는 점 양해 바랍니다.\n" \
+               "📃 상기 식단은 시장 동향에 따라 변경될 수 있는 점 양해 바랍니다.\n\n" \
                "📜 원산지 표시\n" \
                "쌀(국내산), 배추김치(맛김치 - 배추: 국내산, 고춧가루: 중국산)" \
                "깍두기(무 : 국내산, 고춧가루 : 중국산) 우육(호주산,미국산), 돈육" \
-               "(국내산,수입산), 계육(국산) 식육가공품(국내산/수입산)\n" \
+               "(국내산,수입산), 계육(국산) 식육가공품(국내산/수입산)\n\n" \
                "제공되는 메뉴 및 원산지는 식자재 수급 현황에 따라 변경 될 수 있으니" \
                "정확한 정보는 식당 입구에 게시된 일일메뉴표를 참고바랍니다."
         response = insert_text(text)
@@ -187,16 +193,12 @@ def get_R_DB(request):
     return_str = return_json_str['userRequest']['utterance']
 
     if return_str == "경기 RDB":
-        answer = "더미"
+        answer = "경기 RDB"
         return JsonResponse(answer)
     elif return_str == "경기RDB문의사항":
-        text = "⏰ 운영시간안내\n - 중식 11:30 ~ 13:10\n" \
-               "- 석식 17:30 ~ 18:30\n\n" \
-               "📃 상기 식단은 시장 동향에 따라 변경될 수 있는 점 양해 바랍니다.\n" \
-               "📜 원산지 표시\n" \
-               "쌀(국내산), 배추김치(맛김치 - 배추: 국내산, 고춧가루: 중국산)" \
-               "깍두기(무 : 국내산, 고춧가루 : 중국산) 우육(호주산,미국산), 돈육" \
-               "(국내산,수입산), 계육(국산) 식육가공품(국내산/수입산)\n" \
-               "제공되는 메뉴 및 원산지는 식자재 수급 현황에 따라 변경 될 수 있으니" \
-               "정확한 정보는 식당 입구에 게시된 일일메뉴표를 참고바랍니다."
+        text = "📪 문의사항 : 조혜성 영양사 [hyeseong92@daum.net] \n" \
+               "010-3168-9547 로 연락 바랍니다."
+        response = insert_text(text)
+        response = makeWeekendReply("경기 RDB", response)
+        return JsonResponse(response)
 
