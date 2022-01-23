@@ -51,7 +51,7 @@ def get_chaSeDae(request):
 
         # 실제 보여줄 음식에 대한 메뉴는 위에서 처리했다 이 밑에는 이제 사용자의 클릭을 유도하는 메뉴 생성
         response = insert_text(text)
-        response = makeWeekendReply("차세대기술융합기술원", response)
+        response = makeWeekendReply("차세대융합기술원", response)
         return JsonResponse(response)
 
     elif return_str == "월요일차세대융합기술원":
@@ -65,7 +65,7 @@ def get_chaSeDae(request):
         text += menuFormat("[TakeOut]", menus[0].takeOut)
         
         response = insert_text(text)
-        response = makeWeekendReply("차세대기술융합기술원", response)
+        response = makeWeekendReply("차세대융합기술원", response)
         print(response)
         return JsonResponse(response)
     
@@ -80,7 +80,7 @@ def get_chaSeDae(request):
         text += menuFormat("[TakeOut]", menus[1].takeOut)
         
         response = insert_text(text)
-        response = makeWeekendReply("차세대기술융합기술원", response)
+        response = makeWeekendReply("차세대융합기술원", response)
         print(response)
         return JsonResponse(response)
     
@@ -95,7 +95,7 @@ def get_chaSeDae(request):
         text += menuFormat("[TakeOut]", menus[2].takeOut)
         
         response = insert_text(text)
-        response = makeWeekendReply("차세대기술융합기술원", response)
+        response = makeWeekendReply("차세대융합기술원", response)
         print(response)
         return JsonResponse(response)
     
@@ -110,7 +110,7 @@ def get_chaSeDae(request):
         text += menuFormat("[TakeOut]", menus[3].takeOut)
         
         response = insert_text(text)
-        response = makeWeekendReply("차세대기술융합기술원", response)
+        response = makeWeekendReply("차세대융합기술원", response)
         print(response)
         return JsonResponse(response)
     
@@ -125,7 +125,7 @@ def get_chaSeDae(request):
         text += menuFormat("[TakeOut]", menus[4].takeOut)
         
         response = insert_text(text)
-        response = makeWeekendReply("차세대기술융합기술원", response)
+        response = makeWeekendReply("차세대융합기술원", response)
         print(response)
         return JsonResponse(response)
         
