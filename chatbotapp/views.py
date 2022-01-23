@@ -76,6 +76,7 @@ def get_chaSeDae(request):
         # 실제 보여줄 음식에 대한 메뉴는 위에서 처리했다 이 밑에는 이제 사용자의 클릭을 유도하는 메뉴 생성
         response = insert_text(text)
         response = makeWeekendReply("차세대융합기술원", response)
+        
         return JsonResponse(response)
 
     elif return_str == "월요일차세대융합기술원":
@@ -169,7 +170,11 @@ def get_nano(request):
     return_str = return_json_str['userRequest']['utterance']
 
     if return_str == "한국나노기술원":
-        answer = "더미"
+        
+        
+        
+        
+        answer = "안뇽"
         return JsonResponse(answer)
     elif return_str == "한국나노기술원문의사항":
         text = "⏰ 운영시간안내\n- 중식 11:30 ~ 13:10\n" \
@@ -193,6 +198,10 @@ def get_R_DB(request):
     return_str = return_json_str['userRequest']['utterance']
 
     if return_str == "경기 RDB":
+        
+        
+        
+        
         answer = "경기 RDB"
         return JsonResponse(answer)
     elif return_str == "경기RDB문의사항":
