@@ -254,7 +254,10 @@ def get_nano(request):
         response = insert_text(text)
         response = makeWeekendReply("한국나노기술원", response)
         return JsonResponse(response)
-
+    else:
+        text = "error"
+        response = insert_text(text)
+        return JsonResponse(response)
 
 @csrf_exempt
 def get_R_DB(request):
@@ -346,7 +349,7 @@ def get_R_DB(request):
         response = makeWeekendReply("경기 RDB", response)
         return JsonResponse(response)
     
-    elif return_str == "경기RDB문의사항":
+    elif return_str == "경기 RDB문의사항":
         text = "📪 문의사항 : 조혜성 영양사 [hyeseong92@daum.net] \n" \
                "010-3168-9547 로 연락 바랍니다."
         response = insert_text(text)
