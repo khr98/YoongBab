@@ -91,7 +91,6 @@ def get_chaSeDae(request):
         
         response = insert_text(text)
         response = makeWeekendReply("차세대융합기술원", response)
-        print(response)
         return JsonResponse(response)
     
     elif return_str == "화요일차세대융합기술원":
@@ -106,7 +105,6 @@ def get_chaSeDae(request):
         
         response = insert_text(text)
         response = makeWeekendReply("차세대융합기술원", response)
-        print(response)
         return JsonResponse(response)
     
     elif return_str == "수요일차세대융합기술원":
@@ -121,7 +119,6 @@ def get_chaSeDae(request):
         
         response = insert_text(text)
         response = makeWeekendReply("차세대융합기술원", response)
-        print(response)
         return JsonResponse(response)
     
     elif return_str == "목요일차세대융합기술원":
@@ -136,7 +133,6 @@ def get_chaSeDae(request):
         
         response = insert_text(text)
         response = makeWeekendReply("차세대융합기술원", response)
-        print(response)
         return JsonResponse(response)
     
     elif return_str == "금요일차세대융합기술원":
@@ -151,7 +147,6 @@ def get_chaSeDae(request):
         
         response = insert_text(text)
         response = makeWeekendReply("차세대융합기술원", response)
-        print(response)
         return JsonResponse(response)
 
     elif return_str == "차세대융합기술원문의사항":
@@ -168,14 +163,84 @@ def get_nano(request):
     answer = request.body.decode('utf-8')
     return_json_str = json.loads(answer)
     return_str = return_json_str['userRequest']['utterance']
+    menus = Nano.objects.all();
 
     if return_str == "한국나노기술원":
+        # 여기에 데이터 베이스에서 차세대 융합기술원에서 하루 전체 메뉴가져오는 로직 지금은 text 로 dummy 로 쓰겠음
+        text = "오늘 한국나노기술원 식단\n\n"
+        menu = Nano.objects.filter(date=date.today())[0]
+
+        text += menuFormat("[정성이 가득한 점심 A코너]", menu.lunchA)
+        text += menuFormat("[정성이 가득한 점심 B코너]", menu.lunchB)
+        text += menuFormat("[PLUS]", menu.plus)
+        text += menuFormat("[하루를 마무리 하는 저녁]", menu.dinner)
+
+        # 실제 보여줄 음식에 대한 메뉴는 위에서 처리했다 이 밑에는 이제 사용자의 클릭을 유도하는 메뉴 생성
+        response = insert_text(text)
+        response = makeWeekendReply("한국나노기술원", response)
         
+        return JsonResponse(response)
+
+    elif return_str == "월요일한국나노기술원":
+        text = "월요일 한국나노기술원식단\n\n"
         
+        text += menuFormat("[정성이 가득한 점심 A코너]", menus[0].lunchA)
+        text += menuFormat("[정성이 가득한 점심 B코너]", menus[0].lunchB)
+        text += menuFormat("[PLUS]", menus[0].plus)
+        text += menuFormat("[하루를 마무리 하는 저녁]", menus[0].dinner)
         
+        response = insert_text(text)
+        response = makeWeekendReply("한국나노기술원", response)
+        return JsonResponse(response)
+    
+    elif return_str == "화요일한국나노기술원":
+        text = "화요일 한국나노기술원식단\n\n"
         
-        answer = "안뇽"
-        return JsonResponse(answer)
+        text += menuFormat("[정성이 가득한 점심 A코너]", menus[1].lunchA)
+        text += menuFormat("[정성이 가득한 점심 B코너]", menus[1].lunchB)
+        text += menuFormat("[PLUS]", menus[1].plus)
+        text += menuFormat("[하루를 마무리 하는 저녁]", menus[1].dinner)
+        
+        response = insert_text(text)
+        response = makeWeekendReply("한국나노기술원", response)
+        return JsonResponse(response)
+    
+    elif return_str == "수요일한국나노기술원":
+        text = "수요일 한국나노기술원식단\n\n"
+        
+        text += menuFormat("[정성이 가득한 점심 A코너]", menus[2].lunchA)
+        text += menuFormat("[정성이 가득한 점심 B코너]", menus[2].lunchB)
+        text += menuFormat("[PLUS]", menus[2].plus)
+        text += menuFormat("[하루를 마무리 하는 저녁]", menus[2].dinner)
+        
+        response = insert_text(text)
+        response = makeWeekendReply("한국나노기술원", response)
+        return JsonResponse(response)
+    
+    elif return_str == "목요일한국나노기술원":
+        text = "목요일 한국나노기술원식단\n\n"
+        
+        text += menuFormat("[정성이 가득한 점심 A코너]", menus[3].lunchA)
+        text += menuFormat("[정성이 가득한 점심 B코너]", menus[3].lunchB)
+        text += menuFormat("[PLUS]", menus[3].plus)
+        text += menuFormat("[하루를 마무리 하는 저녁]", menus[3].dinner)
+        
+        response = insert_text(text)
+        response = makeWeekendReply("한국나노기술원", response)
+        return JsonResponse(response)
+    
+    elif return_str == "금요일한국나노기술원":
+        text = "금요일 한국나노기술원식단\n\n"
+        
+        text += menuFormat("[정성이 가득한 점심 A코너]", menus[4].lunchA)
+        text += menuFormat("[정성이 가득한 점심 B코너]", menus[4].lunchB)
+        text += menuFormat("[PLUS]", menus[4].plus)
+        text += menuFormat("[하루를 마무리 하는 저녁]", menus[4].dinner)
+        
+        response = insert_text(text)
+        response = makeWeekendReply("한국나노기술원", response)
+        return JsonResponse(response)
+        
     elif return_str == "한국나노기술원문의사항":
         text = "⏰ 운영시간안내\n- 중식 11:30 ~ 13:10\n" \
                "- 석식 17:30 ~ 18:30\n\n" \
@@ -196,14 +261,91 @@ def get_R_DB(request):
     answer = request.body.decode('utf-8')
     return_json_str = json.loads(answer)
     return_str = return_json_str['userRequest']['utterance']
+    menus = RDB.objects.all();
 
     if return_str == "경기 RDB":
+        # 여기에 데이터 베이스에서 차세대 융합기술원에서 하루 전체 메뉴가져오는 로직 지금은 text 로 dummy 로 쓰겠음
+        text = "오늘 경기 RDB 식단\n\n"
+        menu = RDB.objects.filter(date=date.today())[0]
+
+        text += menuFormat("[한식]", menu.korea)
+        text += menuFormat("[일품]", menu.special)
+        text += menuFormat("[플러스바]", menu.plus)
+        text += menuFormat("[석식]", menu.dinner)
+        text += menuFormat("[TaktOut]", menu.takeOut)
+
+        # 실제 보여줄 음식에 대한 메뉴는 위에서 처리했다 이 밑에는 이제 사용자의 클릭을 유도하는 메뉴 생성
+        response = insert_text(text)
+        response = makeWeekendReply("경기 RDB", response)
         
+        return JsonResponse(response)
+
+    elif return_str == "월요일경기 RDB":
+        text = "월요일 경기 RDB 식단\n\n"
         
+        text += menuFormat("[한식]", menus[0].korea)
+        text += menuFormat("[일품]", menus[0].special)
+        text += menuFormat("[플러스바]", menus[0].plus)
+        text += menuFormat("[석식]", menus[0].dinner)
+        text += menuFormat("[TaktOut]", menus[0].takeOut)
         
+        response = insert_text(text)
+        response = makeWeekendReply("경기 RDB", response)
+        return JsonResponse(response)
+    
+    elif return_str == "화요일경기 RDB":
+        text = "화요일 경기 RDB 식단\n\n"
         
-        answer = "경기 RDB"
-        return JsonResponse(answer)
+        text += menuFormat("[한식]", menus[1].korea)
+        text += menuFormat("[일품]", menus[1].special)
+        text += menuFormat("[플러스바]", menus[1].plus)
+        text += menuFormat("[석식]", menus[1].dinner)
+        text += menuFormat("[TaktOut]", menus[1].takeOut)
+        
+        response = insert_text(text)
+        response = makeWeekendReply("경기 RDB", response)
+        return JsonResponse(response)
+    
+    elif return_str == "수요일경기 RDB":
+        text = "수요일 경기 RDB 식단\n\n"
+        
+        text += menuFormat("[한식]", menus[2].korea)
+        text += menuFormat("[일품]", menus[2].special)
+        text += menuFormat("[플러스바]", menus[2].plus)
+        text += menuFormat("[석식]", menus[2].dinner)
+        text += menuFormat("[TaktOut]", menus[2].takeOut)
+        
+        response = insert_text(text)
+        response = makeWeekendReply("경기 RDB", response)
+        return JsonResponse(response)
+    
+    
+    elif return_str == "목요일경기 RDB":
+        text = "목요일 경기 RDB 식단\n\n"
+        
+        text += menuFormat("[한식]", menus[3].korea)
+        text += menuFormat("[일품]", menus[3].special)
+        text += menuFormat("[플러스바]", menus[3].plus)
+        text += menuFormat("[석식]", menus[3].dinner)
+        text += menuFormat("[TaktOut]", menus[3].takeOut)
+        
+        response = insert_text(text)
+        response = makeWeekendReply("경기 RDB", response)
+        return JsonResponse(response)
+    
+    elif return_str == "금요일경기 RDB":
+        text = "금요일 경기 RDB 식단\n\n"
+        
+        text += menuFormat("[한식]", menus[4].korea)
+        text += menuFormat("[일품]", menus[4].special)
+        text += menuFormat("[플러스바]", menus[4].plus)
+        text += menuFormat("[석식]", menus[4].dinner)
+        text += menuFormat("[TaktOut]", menus[4].takeOut)
+        
+        response = insert_text(text)
+        response = makeWeekendReply("경기 RDB", response)
+        return JsonResponse(response)
+    
     elif return_str == "경기RDB문의사항":
         text = "📪 문의사항 : 조혜성 영양사 [hyeseong92@daum.net] \n" \
                "010-3168-9547 로 연락 바랍니다."
