@@ -18,14 +18,38 @@ def menu_list(request):
 
 
 @csrf_exempt
-def menu_create(request):
+def chaSeDae_create(request):
     if request.method == 'POST':
-        form = MenuForm(request.POST, request.FILES)
+        form = chaSeDaeForm(request.POST, request.FILES)
         if form.is_valid():
             menu = form.save()
             return redirect('chatbot:list')
     else:
-        form = MenuForm()
+        form = chaSeDaeForm()
+    ctx = {'form': form}
+    return render(request, template_name='menu_form.html', context=ctx)
+
+@csrf_exempt
+def nano_create(request):
+    if request.method == 'POST':
+        form = nanoForm(request.POST, request.FILES)
+        if form.is_valid():
+            menu = form.save()
+            return redirect('chatbot:list')
+    else:
+        form = nanoForm()
+    ctx = {'form': form}
+    return render(request, template_name='menu_form.html', context=ctx)
+
+@csrf_exempt
+def RDB_create(request):
+    if request.method == 'POST':
+        form = RDBForm(request.POST, request.FILES)
+        if form.is_valid():
+            menu = form.save()
+            return redirect('chatbot:list')
+    else:
+        form = RDBForm()
     ctx = {'form': form}
     return render(request, template_name='menu_form.html', context=ctx)
 
