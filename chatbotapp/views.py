@@ -61,7 +61,7 @@ def get_chaSeDae(request):
     return_str = return_json_str['userRequest']['utterance']
     menus = ChaSeDae.objects.all();
 
-    if return_str == "차세대융합기술원":
+    if return_str == "차세대융합기술원" or return_str == "🚗🚗🚗차세대융합기술원":
         # 여기에 데이터 베이스에서 차세대 융합기술원에서 하루 전체 메뉴가져오는 로직 지금은 text 로 dummy 로 쓰겠음
         text = "오늘 차세대융합기술원 식단\n\n"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
@@ -165,7 +165,7 @@ def get_nano(request):
     return_str = return_json_str['userRequest']['utterance']
     menus = Nano.objects.all();
 
-    if return_str == "한국나노기술원":
+    if return_str == "한국나노기술원" or return_str == "🍚한국나노기술원":
         # 여기에 데이터 베이스에서 차세대 융합기술원에서 하루 전체 메뉴가져오는 로직 지금은 text 로 dummy 로 쓰겠음
         text = "오늘 한국나노기술원 식단\n\n"
         menu = Nano.objects.filter(date=date.today())[0]
@@ -266,7 +266,7 @@ def get_R_DB(request):
     return_str = return_json_str['userRequest']['utterance']
     menus = RDB.objects.all();
 
-    if return_str == "경기 RDB":
+    if return_str == "경기 RDB" or return_str == "🍙경기 RDB":
         # 여기에 데이터 베이스에서 차세대 융합기술원에서 하루 전체 메뉴가져오는 로직 지금은 text 로 dummy 로 쓰겠음
         text = "오늘 경기 RDB 식단\n\n"
         menu = RDB.objects.filter(date=date.today())[0]
