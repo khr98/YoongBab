@@ -273,8 +273,9 @@ def get_R_DB(request):
 
         text += menuFormat("[한식]", menu.korea)
         text += menuFormat("[일품]", menu.special)
-        text += menuFormat("[플러스바]", menu.plus)
+        text += menuFormat("[점심 플러스바]", menu.lunch_plus)
         text += menuFormat("[석식]", menu.dinner)
+        text += menuFormat("[저녁 플러스바]", menu.dinner_plus)
         text += menuFormat("[TaktOut]", menu.takeOut)
 
         # 실제 보여줄 음식에 대한 메뉴는 위에서 처리했다 이 밑에는 이제 사용자의 클릭을 유도하는 메뉴 생성
@@ -288,8 +289,9 @@ def get_R_DB(request):
         
         text += menuFormat("[한식]", menus[0].korea)
         text += menuFormat("[일품]", menus[0].special)
-        text += menuFormat("[플러스바]", menus[0].plus)
+        text += menuFormat("[점심 플러스바]", menus[0].lunch_plus)
         text += menuFormat("[석식]", menus[0].dinner)
+        text += menuFormat("[저녁 플러스바]", menus[0].dinner_plus)
         text += menuFormat("[TaktOut]", menus[0].takeOut)
         
         response = insert_text(text)
@@ -301,8 +303,9 @@ def get_R_DB(request):
         
         text += menuFormat("[한식]", menus[1].korea)
         text += menuFormat("[일품]", menus[1].special)
-        text += menuFormat("[플러스바]", menus[1].plus)
+        text += menuFormat("[점심 플러스바]", menus[1].lunch_plus)
         text += menuFormat("[석식]", menus[1].dinner)
+        text += menuFormat("[저녁 플러스바]", menus[1].dinner_plus)
         text += menuFormat("[TaktOut]", menus[1].takeOut)
         
         response = insert_text(text)
@@ -314,8 +317,9 @@ def get_R_DB(request):
         
         text += menuFormat("[한식]", menus[2].korea)
         text += menuFormat("[일품]", menus[2].special)
-        text += menuFormat("[플러스바]", menus[2].plus)
+        text += menuFormat("[점심 플러스바]", menus[2].lunch_plus)
         text += menuFormat("[석식]", menus[2].dinner)
+        text += menuFormat("[저녁 플러스바]", menus[2].dinner_plus)
         text += menuFormat("[TaktOut]", menus[2].takeOut)
         
         response = insert_text(text)
@@ -328,8 +332,9 @@ def get_R_DB(request):
         
         text += menuFormat("[한식]", menus[3].korea)
         text += menuFormat("[일품]", menus[3].special)
-        text += menuFormat("[플러스바]", menus[3].plus)
+        text += menuFormat("[점심 플러스바]", menus[3].lunch_plus)
         text += menuFormat("[석식]", menus[3].dinner)
+        text += menuFormat("[저녁 플러스바]", menus[3].dinner_plus)
         text += menuFormat("[TaktOut]", menus[3].takeOut)
         
         response = insert_text(text)
@@ -341,8 +346,9 @@ def get_R_DB(request):
         
         text += menuFormat("[한식]", menus[4].korea)
         text += menuFormat("[일품]", menus[4].special)
-        text += menuFormat("[플러스바]", menus[4].plus)
+        text += menuFormat("[점심 플러스바]", menus[4].lunch_plus)
         text += menuFormat("[석식]", menus[4].dinner)
+        text += menuFormat("[저녁 플러스바]", menus[4].dinner_plus)
         text += menuFormat("[TaktOut]", menus[4].takeOut)
         
         response = insert_text(text)

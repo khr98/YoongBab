@@ -20,7 +20,8 @@ class Nano(models.Model):
 class RDB(models.Model):
     korea = models.TextField(verbose_name="한식", null=True)
     special = models.TextField(verbose_name="일품", null=True)
-    plus = models.TextField(verbose_name="플러스바", null=True)
+    lunch_plus = models.TextField(verbose_name="점심 플러스바", null=True)
     dinner = models.TextField(verbose_name="저녁", null=True)
+    dinner_plus = models.TextField(verbose_name="저녁 플러스바", null=True)
     takeOut = models.TextField(verbose_name="TakeOut",null=True)
     date = models.DateField(verbose_name="날짜", null=True)
