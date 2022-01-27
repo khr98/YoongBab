@@ -22,9 +22,9 @@
 ## Dev Stack
 <br/>
 
-<code><img width="100" height="100" src="https://www.vectorlogo.zone/logos/djangoproject/djangoproject-icon.svg"></code>
-<code><img width="100" height="100" src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg"></code>
-<code><img width="100" height="100" src="https://www.vectorlogo.zone/logos/kakaocorp_talk/kakaocorp_talk-icon.svg"></code>
+<code><img width="60" height="60" src="https://www.vectorlogo.zone/logos/djangoproject/djangoproject-icon.svg"></code>
+<code><img width="60" height="60" src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg"></code>
+<code><img width="60" height="60" src="https://www.vectorlogo.zone/logos/kakaocorp_talk/kakaocorp_talk-icon.svg"></code>
 
 
 
