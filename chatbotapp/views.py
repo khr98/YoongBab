@@ -3,11 +3,11 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from chatbotapp.functions.is_vacation import get_vacation
 from chatbotapp.functions.menuFormatting import makeWeekendReply, menuFormat
+from chatbotapp.functions.is_vacation import is_holiday
 from .kakaojsonformat.response import insert_text, make_reply, insert_replies
 from .form import *
 import json
 from datetime import date
-
 
 # Create your views here.
 
@@ -63,7 +63,8 @@ def get_chaSeDae(request):
 
     if return_str == "차세대융합기술원" or return_str == "🚗🚗🚗차세대융합기술원":
 
-        if get_vacation():
+        
+        if is_holiday():
             response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n 행복한 하루 되세요")
             return JsonResponse(response)
 
@@ -171,7 +172,7 @@ def get_nano(request):
 
     if return_str == "한국나노기술원" or return_str == "🍚한국나노기술원":
         # 여기에 데이터 베이스에서 차세대 융합기술원에서 하루 전체 메뉴가져오는 로직 지금은 text 로 dummy 로 쓰겠음
-        if get_vacation():
+        if is_holiday():
             response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n 행복한 하루 되세요")
             return JsonResponse(response)
         text = "오늘 한국나노기술원 식단\n\n"
@@ -274,7 +275,7 @@ def get_R_DB(request):
     menus = RDB.objects.all();
 
     if return_str == "경기 RDB" or return_str == "🍙경기 RDB":
-        if get_vacation():
+        if is_holiday():
             response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n 행복한 하루 되세요")
             return JsonResponse(response)
         text = "오늘 경기 RDB 식단\n\n"
