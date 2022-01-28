@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from chatbotapp.functions.is_vacation import get_vacation
 from chatbotapp.functions.menuFormatting import makeWeekendReply, menuFormat
 from chatbotapp.functions.is_vacation import is_holiday
 from .kakaojsonformat.response import insert_text, make_reply, insert_replies
