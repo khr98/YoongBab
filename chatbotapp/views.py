@@ -138,19 +138,24 @@ def get_nano(request):
             response = makeWeekendReply("한국나노기술원", response)
             return JsonResponse(response)
         
-        text = "오늘 한국나노기술원 식단\n\n"
-        menu = Nano.objects.filter(date=date.today())[0]
+        try:
+            menu = Nano.objects.filter(date=date.today())[0]
+            text = "오늘 한국나노기술원 식단\n\n"
 
-        text += menuFormat("[정성이 가득한 점심 A코너]", menu.lunchA)
-        text += menuFormat("[정성이 가득한 점심 B코너]", menu.lunchB)
-        text += menuFormat("[PLUS]", menu.plus)
-        text += menuFormat("[하루를 마무리 하는 저녁]", menu.dinner)
+            text += menuFormat("[정성이 가득한 점심 A코너]", menu.lunchA)
+            text += menuFormat("[정성이 가득한 점심 B코너]", menu.lunchB)
+            text += menuFormat("[PLUS]", menu.plus)
+            text += menuFormat("[하루를 마무리 하는 저녁]", menu.dinner)
 
-        # 실제 보여줄 음식에 대한 메뉴는 위에서 처리했다 이 밑에는 이제 사용자의 클릭을 유도하는 메뉴 생성
-        response = insert_text(text)
-        response = makeWeekendReply("한국나노기술원", response)
+            # 실제 보여줄 음식에 대한 메뉴는 위에서 처리했다 이 밑에는 이제 사용자의 클릭을 유도하는 메뉴 생성
+            response = insert_text(text)
+            response = makeWeekendReply("한국나노기술원", response)
 
-        return JsonResponse(response)
+            return JsonResponse(response)
+        except:
+            response = insert_text("아직 식단이 제공되지 않았어요!")
+            response = makeWeekendReply("한국나노기술원", response)
+            return JsonResponse(response)
     
     elif return_str == "한국나노기술원문의사항":
         text = "⏰ 운영시간안내\n- 중식 11:30 ~ 13:10\n" \
@@ -187,7 +192,7 @@ def get_nano(request):
         except:
             text = selectedDay.strftime('%m-%d')
             text += " 아직 식단이 제공되지 않았어요!\n"
-            response = insert_text("아직 식단이 제공되지 않았어요!")
+            response = insert_text(text)
             response = makeWeekendReply("한국나노기술원", response)
             return JsonResponse(response)
 
