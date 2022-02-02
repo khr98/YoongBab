@@ -195,6 +195,7 @@ def get_R_DB(request):
     if return_str == "경기 RDB" or return_str == "🍙경기 RDB":
         if is_holiday():
             response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
+            response = makeWeekendReply("경기 RDB", response)
             return JsonResponse(response)
         text = "오늘 경기 RDB 식단\n\n"
         menu = RDB.objects.filter(date=date.today())[0]
