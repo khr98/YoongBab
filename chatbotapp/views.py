@@ -169,18 +169,32 @@ def get_nano(request):
     else:
         delta = weekConverter(return_str) - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
-        menu = Nano.objects.filter(date=selectedDay)[0]
-        text = selectedDay.strftime('%m-%d')
-        text += " 한국나노기술원식단\n\n"
+        try:
+            menu = Nano.objects.filter(date=selectedDay)[0]
+            
+            text = selectedDay.strftime('%m-%d')
+            text += " 한국나노기술원식단\n\n"
+                
+            text += menuFormat("[정성이 가득한 점심 A코너]", menu.lunchA)
+            text += menuFormat("[정성이 가득한 점심 B코너]", menu.lunchB)
+            text += menuFormat("[PLUS]", menu.plus)
+            text += menuFormat("[하루를 마무리 하는 저녁]", menu.dinner)
+                
+            response = insert_text(text)
+            response = makeWeekendReply("한국나노기술원", response)
         
-        text += menuFormat("[정성이 가득한 점심 A코너]", menu.lunchA)
-        text += menuFormat("[정성이 가득한 점심 B코너]", menu.lunchB)
-        text += menuFormat("[PLUS]", menu.plus)
-        text += menuFormat("[하루를 마무리 하는 저녁]", menu.dinner)
+            return JsonResponse(response)
+        except:
+            text = selectedDay.strftime('%m-%d')
+            text += " 아직 식단이 제공되지 않았어요!\n"
+            response = insert_text("아직 식단이 제공되지 않았어요!")
+            response = makeWeekendReply("한국나노기술원", response)
+            return JsonResponse(response)
+
         
-        response = insert_text(text)
-        response = makeWeekendReply("한국나노기술원", response)
-        return JsonResponse(response)
+    
+           
+       
         
 
     
