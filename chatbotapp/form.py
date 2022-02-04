@@ -18,3 +18,9 @@ class RDBForm(forms.ModelForm):
         model = RDB
         fields = '__all__'
     date = forms.DateField(label='date', widget=forms.SelectDateWidget)
+    
+class tableForm(forms.ModelForm):
+    class Meta:
+        model = MenuTable
+        fields = '__all__'
+    date = forms.DateField(label='date', widget=forms.SelectDateWidget)

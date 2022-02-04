@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from chatbotapp.functions.menuFormatting import makeWeekendReply, menuFormat
 from chatbotapp.functions.is_vacation import is_holiday
 from chatbotapp.functions.weekdayConverter import weekConverter
-from .kakaojsonformat.response import insert_text, make_reply, insert_replies
+from .kakaojsonformat.response import insert_image, insert_text, make_reply, insert_replies
 from .form import *
 import json
 from datetime import date, timedelta
@@ -101,6 +101,15 @@ def get_chaSeDae(request):
         text = "📪 문의사항 : 우혜림 영양사 [prefla@naver.com] \n" \
                "031-888-9497 로 연락 바랍니다."
         response = insert_text(text)
+        response = makeWeekendReply("차세대융합기술원", response)
+        return JsonResponse(response)
+    
+    elif return_str == "차세대융합기술원식단표":
+        delta = weekConverter("월") - datetime.datetime.today().weekday()
+        selectedDay = date.today() + timedelta(days=delta)
+        table = MenuTable.objects.filter(date=selectedDay)[0]
+        text = "이번주 차세대융합기술원 식단표입니다\n"
+        response = insert_image(table, text)
         response = makeWeekendReply("차세대융합기술원", response)
         return JsonResponse(response)
     
