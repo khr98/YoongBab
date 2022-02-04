@@ -25,3 +25,9 @@ class RDB(models.Model):
     dinner_plus = models.TextField(verbose_name="저녁 플러스바", null=True)
     takeOut = models.TextField(verbose_name="TakeOut",null=True)
     date = models.DateField(verbose_name="날짜", null=True)
+    
+RESTAURANT_CHOICES= (('차세대', '차세대'), ('나노', '나노'), ('RDB', 'RDB'))
+class MenuTable(models.Model):
+    restaurant = models.CharField(verbose_name="식당", max_length=10, choices=RESTAURANT_CHOICES, default='차세대')
+    table_img = models.ImageField(upload_to="tables", null=True, blank=True)
+    date = models.DateField(verbose_name="날짜", null=True)

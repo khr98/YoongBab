@@ -27,7 +27,10 @@ def makeWeekendReply(branch, answer):
         
     reply = make_reply("금", "금요일"+branch)
     answer = insert_replies(answer, reply)
-    
+
+    reply = make_reply("식단표", branch + "식단표")
+    answer = insert_replies(answer, reply)
+
     reply = make_reply("문의사항", branch+"문의사항")
     answer = insert_replies(answer, reply)
     return answer
