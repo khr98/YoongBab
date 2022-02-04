@@ -5,10 +5,11 @@ charset-normalizer==2.0.10
 Django==3.2.11
 idna==3.3
 lunardate==0.2.0
+Pillow==9.0.1
 pytimekr==0.1.0
 pytz==2021.3
 requests==2.27.1
 soupsieve==2.3.1
 sqlparse==0.4.2
-typing_extensions==4.0.1
+typing-extensions==4.0.1
 urllib3==1.26.8
