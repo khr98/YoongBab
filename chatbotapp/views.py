@@ -10,7 +10,6 @@ from .form import *
 import json
 from datetime import date, timedelta
 
-
 # Create your views here.
 
 @csrf_exempt
@@ -107,9 +106,8 @@ def get_chaSeDae(request):
     elif return_str == "차세대융합기술원식단표":
         delta = weekConverter("월") - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
-        table = MenuTable.objects.filter(date=selectedDay)[0]
-        text = "이번주 차세대융합기술원 식단표입니다\n"
-        response = insert_image(table, text)
+        table = MenuTable.objects.filter(date=selectedDay,restaurant='차세대')[0]
+        response = insert_image(request.get_host()+"/media/"+str(table.table_img), return_str)
         response = makeWeekendReply("차세대융합기술원", response)
         return JsonResponse(response)
     
@@ -165,7 +163,8 @@ def get_nano(request):
             response = insert_text("아직 식단이 제공되지 않았어요!")
             response = makeWeekendReply("한국나노기술원", response)
             return JsonResponse(response)
-    
+
+
     elif return_str == "한국나노기술원문의사항":
         text = "⏰ 운영시간안내\n- 중식 11:30 ~ 13:10\n" \
                "- 석식 17:30 ~ 18:30\n\n" \
@@ -179,7 +178,15 @@ def get_nano(request):
         response = insert_text(text)
         response = makeWeekendReply("한국나노기술원", response)
         return JsonResponse(response)
-    
+
+    elif return_str == "한국나노기술원식단표":
+        delta = weekConverter("월") - datetime.datetime.today().weekday()
+        selectedDay = date.today() + timedelta(days=delta)
+        table = MenuTable.objects.filter(date=selectedDay,restaurant='나노')[0]
+        response = insert_image(request.get_host()+"/media/"+str(table.table_img), return_str)
+        response = makeWeekendReply("한국나노기술원", response)
+        return JsonResponse(response)
+
     else:
         delta = weekConverter(return_str) - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
@@ -247,7 +254,15 @@ def get_R_DB(request):
         response = insert_text(text)
         response = makeWeekendReply("경기 RDB", response)
         return JsonResponse(response)
-    
+
+    elif return_str == "경기 RDB식단표":
+        delta = weekConverter("월") - datetime.datetime.today().weekday()
+        selectedDay = date.today() + timedelta(days=delta)
+        table = MenuTable.objects.filter(date=selectedDay,restaurant='RDB')[0]
+        response = insert_image(request.get_host()+"/media/"+str(table.table_img), return_str)
+        response = makeWeekendReply("경기 RDB", response)
+        return JsonResponse(response)
+
     else:
         delta = weekConverter(return_str) - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
