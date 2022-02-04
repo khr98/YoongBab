@@ -106,7 +106,7 @@ def get_chaSeDae(request):
     elif return_str == "차세대융합기술원식단표":
         delta = weekConverter("월") - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
-        table = MenuTable.objects.filter(date=selectedDay,restaurant='차세대')[0]
+        table = MenuTables.objects.filter(date=selectedDay,restaurant='차세대')[0]
         response = insert_image(request.get_host()+"/media/"+str(table.table_img), return_str)
         response = makeWeekendReply("차세대융합기술원", response)
         return JsonResponse(response)
@@ -182,7 +182,7 @@ def get_nano(request):
     elif return_str == "한국나노기술원식단표":
         delta = weekConverter("월") - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
-        table = MenuTable.objects.filter(date=selectedDay,restaurant='나노')[0]
+        table = MenuTables.objects.filter(date=selectedDay,restaurant='나노')[0]
         response = insert_image(request.get_host()+"/media/"+str(table.table_img), return_str)
         response = makeWeekendReply("한국나노기술원", response)
         return JsonResponse(response)
@@ -258,7 +258,7 @@ def get_R_DB(request):
     elif return_str == "경기 RDB식단표":
         delta = weekConverter("월") - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
-        table = MenuTable.objects.filter(date=selectedDay,restaurant='RDB')[0]
+        table = MenuTables.objects.filter(date=selectedDay,restaurant='RDB')[0]
         response = insert_image(request.get_host()+"/media/"+str(table.table_img), return_str)
         response = makeWeekendReply("경기 RDB", response)
         return JsonResponse(response)
