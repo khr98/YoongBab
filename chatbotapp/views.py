@@ -220,10 +220,10 @@ def get_nano(request):
 
     if return_str == "한국나노기술원" or return_str == "🍚한국나노기술원":
         # 여기에 데이터 베이스에서 차세대 융합기술원에서 하루 전체 메뉴가져오는 로직 지금은 text 로 dummy 로 쓰겠음
-        if is_holiday():
-            response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
-            response = makeWeekendReply("한국나노기술원", response)
-            return JsonResponse(response)
+        # if is_holiday():
+        #     response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
+        #     response = makeWeekendReply("한국나노기술원", response)
+        #     return JsonResponse(response)
         
         try:
             menu = Nano.objects.filter(date=date.today())[0]
@@ -243,6 +243,59 @@ def get_nano(request):
             response = insert_text("아직 식단이 제공되지 않았어요!")
             response = makeWeekendReply("한국나노기술원", response)
             return JsonResponse(response)
+    
+    elif return_str == "NSO" or return_str == "nso":
+        text = "원하시는 기능의 버튼을 클릭해주세요!"
+        
+        menu = Nano.objects.filter(date=date.today())[0]
+        response =  insert_text(text)
+        if (menu.lunchA.find("품절") == -1):
+            reply = make_reply("A코너품절","한국나노기술원A코너품절")
+            response = insert_replies(response,reply)
+        else:
+            reply = make_reply("A코너품절해제","한국나노기술원A코너품절해제")
+            response = insert_replies(response,reply)
+        if (menu.lunchB.find("품절") == -1):
+            reply = make_reply("B코너품절","한국나노기술원B코너품절")
+            response = insert_replies(response,reply)
+        else:
+            reply = make_reply("B코너품절해제","한국나노기술원B코너품절해제")
+            response = insert_replies(response,reply)
+        
+        return JsonResponse(response)
+    
+    elif return_str == "한국나노기술원A코너품절":
+        text = "한국나노기술원 A코스가 품절되었습니다"
+        menu = Nano.objects.filter(date=date.today())[0]
+        menu.lunchA = "❗️품절❗️,"+ menu.lunchA
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
+    elif return_str == "한국나노기술원B코너품절":
+        text = "한국나노기술원 B코스가 품절되었습니다"
+        menu = Nano.objects.filter(date=date.today())[0]
+        menu.lunchB = "❗️품절❗️,"+ menu.lunchB
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
+    elif return_str == "한국나노기술원A코너품절해제":
+        text = "한국나노기술원 A코너 품절이 해제되었습니다"
+        menu = Nano.objects.filter(date=date.today())[0]
+        menu.lunchA = menu.lunchA.replace("❗️품절❗️,","")
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
+    
+    elif return_str == "한국나노기술원B코너품절해제":
+        text = "한국나노기술원 B코너 품절이 해제되었습니다"
+        menu = Nano.objects.filter(date=date.today())[0]
+        menu.lunchB = menu.lunchB.replace("❗️품절❗️,","")
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
     
     elif return_str == "한국나노기술원문의사항":
         text = "⏰ 운영시간안내\n- 중식 11:30 ~ 13:10\n" \
@@ -299,10 +352,10 @@ def get_R_DB(request):
     return_str = return_json_str['userRequest']['utterance']
 
     if return_str == "경기 RDB" or return_str == "🍙경기 RDB":
-        if is_holiday():
-            response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
-            response = makeWeekendReply("경기 RDB", response)
-            return JsonResponse(response)
+        # if is_holiday():
+        #     response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
+        #     response = makeWeekendReply("경기 RDB", response)
+        #     return JsonResponse(response)
         text = "오늘 경기 RDB 식단\n\n"
         menu = RDB.objects.filter(date=date.today())[0]
 
@@ -319,6 +372,59 @@ def get_R_DB(request):
 
         return JsonResponse(response)
 
+    elif return_str == "RSO" or return_str == "rso":
+        text = "원하시는 기능의 버튼을 클릭해주세요!"
+        
+        menu = RDB.objects.filter(date=date.today())[0]
+        response =  insert_text(text)
+        if (menu.korea.find("품절") == -1):
+            reply = make_reply("한식품절","경기 RDB한식품절")
+            response = insert_replies(response,reply)
+        else:
+            reply = make_reply("한식품절해제","경기 RDB한식품절해제")
+            response = insert_replies(response,reply)
+        if (menu.special.find("품절") == -1):
+            reply = make_reply("일품품절","경기 RDB일품품절")
+            response = insert_replies(response,reply)
+        else:
+            reply = make_reply("일품품절해제","경기 RDB일품품절해제")
+            response = insert_replies(response,reply)
+        
+        return JsonResponse(response)
+    
+    elif return_str == "경기 RDB한식품절":
+        text = "경기 RDB 한식메뉴가 품절되었습니다"
+        menu = RDB.objects.filter(date=date.today())[0]
+        menu.korea = "❗️품절❗️,"+ menu.korea
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
+    elif return_str == "경기 RDB일품품절":
+        text = "경기 RDB 일품메뉴가 품절되었습니다"
+        menu = RDB.objects.filter(date=date.today())[0]
+        menu.special = "❗️품절❗️,"+ menu.special
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+        
+    elif return_str == "경기 RDB한식품절해제":
+        text = "경기 RDB 한식메뉴 품절이 해제되었습니다"
+        menu = RDB.objects.filter(date=date.today())[0]
+        menu.korea = menu.korea.replace("❗️품절❗️,","")
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
+        
+    elif return_str == "경기 RDB일품품절해제":
+        text = "경기 RDB 일품메뉴 품절이 해제되었습니다"
+        menu = RDB.objects.filter(date=date.today())[0]
+        menu.special = menu.special.replace("❗️품절❗️,","")
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
     elif return_str == "경기 RDB문의사항":
         text = "📪 문의사항 : 조혜성 영양사 [hyeseong92@daum.net] \n" \
                "010-3168-9547 로 연락 바랍니다."
