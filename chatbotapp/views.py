@@ -100,26 +100,26 @@ def get_chaSeDae(request):
         text = "원하시는 기능의 버튼을 클릭해주세요!"
         
         menu = ChaSeDae.objects.filter(date=date.today())[0]
-
+        print(menu.moms.find("품절"))
         response =  insert_text(text)
-        if (menu.moms.find("품절")):
-            reply = make_reply("맘스 품절해제","차세대융합기술원맘스품절해제")
+        if (menu.moms.find("품절") == -1):
+            reply = make_reply("맘스품절","차세대융합기술원맘스품절")
             response = insert_replies(response,reply)
         else:
-            reply = make_reply("맘스 품절시키기","차세대융합기술원맘스품절")
+            reply = make_reply("맘스품절해제","차세대융합기술원맘스품절해제")
             response = insert_replies(response,reply)
-        if (menu.chef.find("품절")):
-            reply = make_reply("셰프 품절해제","차세대융합기술원셰프품절해제")
-            response = insert_replies(response,reply)
-        else:
-            reply = make_reply("셰프 품절시키기","차세대융합기술원셰프품절")
-            response = insert_replies(response,reply)
-        if (menu.special.find("품절")):
-            reply = make_reply("정찬 품절해제","차세대융합기술원정찬품절")
+        if (menu.chef.find("품절") == -1):
+            reply = make_reply("셰프품절","차세대융합기술원셰프품절")
             response = insert_replies(response,reply)
         else:
-            reply = make_reply("정찬 품절시키기","차세대융합기술원정찬품절")
-            response = insert_replies(response,reply)  
+            reply = make_reply("셰프품절해제","차세대융합기술원셰프품절해제")
+            response = insert_replies(response,reply)
+        if (menu.special.find("품절") == -1):
+            reply = make_reply("정찬품절","차세대융합기술원정찬품절")
+            response = insert_replies(response,reply) 
+        else:
+            reply = make_reply("정찬품절해제","차세대융합기술원정찬품절")
+            response = insert_replies(response,reply)
         
         return JsonResponse(response)
     
