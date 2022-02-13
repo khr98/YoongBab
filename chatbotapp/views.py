@@ -75,10 +75,10 @@ def get_chaSeDae(request):
     
     if return_str == "차세대융합기술원" or return_str == "🚗🚗🚗차세대융합기술원":
 
-        # if is_holiday():
-        #     response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
-        #     response = makeWeekendReply("차세대융합기술원", response)
-        #     return JsonResponse(response)
+        if is_holiday():
+            response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
+            response = makeWeekendReply("차세대융합기술원", response)
+            return JsonResponse(response)
 
         text = "오늘 차세대융합기술원 식단\n\n"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
@@ -218,10 +218,10 @@ def get_nano(request):
 
     if return_str == "한국나노기술원" or return_str == "🍚한국나노기술원":
         # 여기에 데이터 베이스에서 차세대 융합기술원에서 하루 전체 메뉴가져오는 로직 지금은 text 로 dummy 로 쓰겠음
-        # if is_holiday():
-        #     response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
-        #     response = makeWeekendReply("한국나노기술원", response)
-        #     return JsonResponse(response)
+        if is_holiday():
+            response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
+            response = makeWeekendReply("한국나노기술원", response)
+            return JsonResponse(response)
         
         try:
             menu = Nano.objects.filter(date=date.today())[0]
@@ -359,10 +359,10 @@ def get_R_DB(request):
     return_str = return_json_str['userRequest']['utterance']
 
     if return_str == "경기 RDB" or return_str == "🍙경기 RDB":
-        # if is_holiday():
-        #     response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
-        #     response = makeWeekendReply("경기 RDB", response)
-        #     return JsonResponse(response)
+        if is_holiday():
+            response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
+            response = makeWeekendReply("경기 RDB", response)
+            return JsonResponse(response)
         text = "오늘 경기 RDB 식단\n\n"
         menu = RDB.objects.filter(date=date.today())[0]
 
