@@ -80,7 +80,7 @@ def get_chaSeDae(request):
             response = makeWeekendReply("차세대융합기술원", response)
             return JsonResponse(response)
 
-        text = "오늘 차세대융합기술원 식단\n\n"
+        text = "품절 확인 기능이 추가되었어요!! 실시간으로 업데이트되니 식당 방문전 확인 부탁드려요~🤩\n오늘 차세대융합기술원 식단\n\n"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
 
         text += menuFormat("[맘스]", menu.moms)
@@ -225,7 +225,7 @@ def get_nano(request):
         
         try:
             menu = Nano.objects.filter(date=date.today())[0]
-            text = "오늘 한국나노기술원 식단\n\n"
+            text = "품절 확인 기능이 추가되었어요!! 실시간으로 업데이트되니 식당 방문전 확인 부탁드려요~🤩\n오늘 한국나노기술원 식단\n\n"
 
             text += menuFormat("[정성이 가득한 점심 A코너]", menu.lunchA)
             text += menuFormat("[정성이 가득한 점심 B코너]", menu.lunchB)
@@ -363,7 +363,7 @@ def get_R_DB(request):
             response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
             response = makeWeekendReply("경기 RDB", response)
             return JsonResponse(response)
-        text = "오늘 경기 RDB 식단\n\n"
+        text = "품절 확인 기능이 추가되었어요!! 실시간으로 업데이트되니 식당 방문전 확인 부탁드려요~🤩\n오늘 경기 RDB 식단\n\n"
         menu = RDB.objects.filter(date=date.today())[0]
 
         text += menuFormat("[한식]", menu.korea)
