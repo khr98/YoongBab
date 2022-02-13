@@ -75,10 +75,10 @@ def get_chaSeDae(request):
     
     if return_str == "차세대융합기술원" or return_str == "🚗🚗🚗차세대융합기술원":
 
-        if is_holiday():
-            response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
-            response = makeWeekendReply("차세대융합기술원", response)
-            return JsonResponse(response)
+        # if is_holiday():
+        #     response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
+        #     response = makeWeekendReply("차세대융합기술원", response)
+        #     return JsonResponse(response)
 
         text = "오늘 차세대융합기술원 식단\n\n"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
@@ -96,6 +96,84 @@ def get_chaSeDae(request):
 
         return JsonResponse(response)
     
+    elif return_str == "CSO" or return_str == "cso":
+        text = "원하시는 기능의 버튼을 클릭해주세요!"
+        
+        menu = ChaSeDae.objects.filter(date=date.today())[0]
+
+        response =  insert_text(text)
+        if (menu.moms.find("품절")):
+            reply = make_reply("맘스 품절해제","차세대융합기술원맘스품절해제")
+            response = insert_replies(response,reply)
+        else:
+            reply = make_reply("맘스 품절시키기","차세대융합기술원맘스품절")
+            response = insert_replies(response,reply)
+        if (menu.chef.find("품절")):
+            reply = make_reply("셰프 품절해제","차세대융합기술원셰프품절해제")
+            response = insert_replies(response,reply)
+        else:
+            reply = make_reply("셰프 품절시키기","차세대융합기술원셰프품절")
+            response = insert_replies(response,reply)
+        if (menu.special.find("품절")):
+            reply = make_reply("정찬 품절해제","차세대융합기술원정찬품절")
+            response = insert_replies(response,reply)
+        else:
+            reply = make_reply("정찬 품절시키기","차세대융합기술원정찬품절")
+            response = insert_replies(response,reply)  
+        
+        return JsonResponse(response)
+    
+    elif return_str == "차세대융합기술원맘스품절":
+        text = "차세대융합기술원 맘스 메뉴가 품절되었습니다"
+        menu = ChaSeDae.objects.filter(date=date.today())[0]
+        menu.moms = "❗️품절❗️,"+ menu.moms
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
+    elif return_str == "차세대융합기술원셰프품절":
+        text = "차세대융합기술원 셰프 메뉴가 품절되었습니다"
+        menu = ChaSeDae.objects.filter(date=date.today())[0]
+        menu.chef = "❗️품절❗️,"+ menu.chef
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+        
+    elif return_str == "차세대융합기술원정찬품절":
+        text = "차세대융합기술원 정찬 메뉴가 품절되었습니다"
+        menu = ChaSeDae.objects.filter(date=date.today())[0]
+        menu.special = "❗️품절❗️,"+ menu.special
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
+    elif return_str == "차세대융합기술원맘스품절해제":
+        text = "차세대융합기술원 맘스 메뉴 품절이 해제되었습니다"
+        menu = ChaSeDae.objects.filter(date=date.today())[0]
+        menu.moms = menu.moms.replace("❗️품절❗️,","")
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
+    
+    elif return_str == "차세대융합기술원셰프품절해제":
+        text = "차세대융합기술원 셰프 메뉴 품절이 해제되었습니다"
+        menu = ChaSeDae.objects.filter(date=date.today())[0]
+        menu.chef = menu.chef.replace("❗️품절❗️,","")
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+    
+        
+    elif return_str == "차세대융합기술원정찬품절해제":
+        text = "차세대융합기술원 셰프 메뉴 품절이 해제되었습니다"
+        menu = ChaSeDae.objects.filter(date=date.today())[0]
+        menu.special = menu.special.replace("❗️품절❗️,","")
+        menu.save()
+        response = insert_text(text)
+        return JsonResponse(response)
+        
+        
     elif return_str == "차세대융합기술원문의사항":
         text = "📪 문의사항 : 우혜림 영양사 [prefla@naver.com] \n" \
                "031-888-9497 로 연락 바랍니다."
