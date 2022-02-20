@@ -14,5 +14,5 @@ urlpatterns = [
     path('menu/nano/', views.get_nano, name="menu-nano"),
     path('menu/R-DB/', views.get_R_DB, name="menu-R-DB"),
     path('etc/',views.get_etc,name="etc"),
-    path('',views.uploadFile,name="excel")
+    path('addExcel/',views.uploadFile,name="uploadFile")
 ]

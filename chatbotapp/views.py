@@ -502,14 +502,14 @@ def uploadFile(request):
         uploadedFile = request.FILES["uploadedFile"]
 
         # Saving the information in the database
-        document = models.Document(
+        document = Document(
             title=fileTitle,
             uploadedFile=uploadedFile
         )
         document.save()
 
-    documents = models.Document.objects.all()
+    documents = Document.objects.all()
 
-    return render(request, "excel/upload-file.html", context={
+    return render(request, "upload_file.html", context={
         "files": documents
     })
