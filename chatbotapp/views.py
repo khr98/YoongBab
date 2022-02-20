@@ -469,8 +469,10 @@ def get_etc(request):
 
 @csrf_exempt
 def add_rdb(request):
+    file = request.FILES['myfile']
+    print(file)
     # data_only=True로 해줘야 수식이 아닌 값으로 받아온다.
-    load_wb = load_workbook("/Users/hyerim/Yoongbab/excel/rdb.xlsx", data_only=True)
+    load_wb = load_workbook(file, data_only=True)
     # 시트 이름으로 불러오기
     load_ws = load_wb['경기알앤디비']
 
@@ -490,3 +492,24 @@ def add_rdb(request):
     text = ""
     response = insert_text(text)
     return JsonResponse(response)
+
+
+def uploadFile(request):
+    print("업로드하자")
+    if request.method == "POST":
+        # Fetching the form data
+        fileTitle = request.POST["fileTitle"]
+        uploadedFile = request.FILES["uploadedFile"]
+
+        # Saving the information in the database
+        document = Document(
+            title=fileTitle,
+            uploadedFile=uploadedFile
+        )
+        document.save()
+
+    documents = Document.objects.all()
+
+    return render(request, "upload_file.html", context={
+        "files": documents
+    })

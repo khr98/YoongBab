@@ -9,14 +9,18 @@
 <h2>Date : {{menu.date}}</h2>
 {% endfor %}
 
-<button type="button" onclick="executeRDB()">검색</button>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
   const executeRDB = async () => {
-    console.log("호ㅓ호ㅓ호ㅓ");
     const url = "executeRDB/";
     await axios.post(url, {});
   };
 </script>
+
+
 
 {% endblock %}
