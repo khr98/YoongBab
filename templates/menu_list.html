@@ -5,4 +5,18 @@
 <h2>샐러드: {{ menu.salad }}</h2>
 <h2>석식: {{ menu.dinner }}</h2>
 <h2>Take Out: {{ menu.takeOut }}</h2>
-<h2>Date : {{menu.date}} {% endfor %} {% endblock %}</h2>
+<h2>식단표사진: {{menu.img}}</h2>
+<h2>Date : {{menu.date}}</h2>
+{% endfor %}
+
+<button type="button" onclick="executeRDB()">검색</button>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const executeRDB = async () => {
+    console.log("호ㅓ호ㅓ호ㅓ");
+    const url = "executeRDB/";
+    await axios.post(url, {});
+  };
+</script>
+
+{% endblock %}

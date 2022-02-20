@@ -1,4 +1,5 @@
 import datetime
+from urllib import response
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -9,6 +10,7 @@ from .kakaojsonformat.response import insert_image, insert_text, make_reply, ins
 from .form import *
 import json
 from datetime import date, timedelta
+from openpyxl import load_workbook
 
 
 # Create your views here.
@@ -464,3 +466,27 @@ def get_etc(request):
         # reply = make_reply("🏡홈으로", "홈")
         # answer = insert_replies(answer, reply)
         return JsonResponse(response)
+
+@csrf_exempt
+def add_rdb(request):
+    # data_only=True로 해줘야 수식이 아닌 값으로 받아온다.
+    load_wb = load_workbook("/Users/hyerim/Yoongbab/excel/rdb.xlsx", data_only=True)
+    # 시트 이름으로 불러오기
+    load_ws = load_wb['경기알앤디비']
+
+    # 셀 주소로 값 출력
+    a = 65
+    a = "D4"
+    for i in range(68, 73):
+        
+        tempKorea = load_ws[chr(i)+'4'].value + "," + load_ws[chr(i)+'5'].value +"," + load_ws[chr(i)+'6'].value + "," + load_ws[chr(i)+'7'].value + "," + load_ws[chr(i)+'8'].value +  "," + load_ws[chr(i)+'9'].value
+        tempSpecial = load_ws[chr(i)+'10'].value + "," + load_ws[chr(i)+'11'].value +"," + load_ws[chr(i)+'12'].value + "," + load_ws[chr(i)+'13'].value + "," + load_ws[chr(i)+'14'].value +  "," + load_ws[chr(i)+'15'].value
+        tempLunchPlus = load_ws[chr(i)+'16'].value + "," + load_ws[chr(i)+'17'].value +"," + load_ws[chr(i)+'18'].value +"," + load_ws[chr(i)+'19'].value
+        tempDinner = load_ws[chr(i)+'20'].value + "," + load_ws[chr(i)+'21'].value +"," + load_ws[chr(i)+'22'].value +"," + load_ws[chr(i)+'23'].value + load_ws[chr(i)+'24'].value
+        tempDinnerPlus = load_ws[chr(i)+'25'].value + "," + load_ws[chr(i)+'26'].value +"," + load_ws[chr(i)+'27'].value
+        tempTakeOut = load_ws[chr(i)+'28'].value + "," + load_ws[chr(i)+'29'].value
+        print(tempTakeOut);
+        RDB.objects.create(date=load_ws[chr(i)+'3'].value,korea=tempKorea,special=tempSpecial,lunch_plus=tempLunchPlus,dinner=tempDinner,dinner_plus=tempDinnerPlus,takeOut=tempTakeOut)
+    text = ""
+    response = insert_text(text)
+    return JsonResponse(response)
