@@ -31,3 +31,9 @@ class MenuTables(models.Model):
     restaurant = models.CharField(verbose_name="식당", max_length=10, choices=RESTAURANT_CHOICES, default='차세대')
     table_img = models.ImageField(verbose_name="식단표", upload_to="tables", null=True, blank=True)
     date = models.DateField(verbose_name="날짜", null=True)
+
+
+class Document(models.Model):
+    title = models.CharField(max_length=200)
+    uploadedFile = models.FileField(upload_to="result/")
+    dateTimeOfUpload = models.DateTimeField(auto_now=True)
