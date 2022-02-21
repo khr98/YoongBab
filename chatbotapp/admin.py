@@ -5,4 +5,5 @@ from .models import *
 admin.site.register(ChaSeDae)
 admin.site.register(Nano)
 admin.site.register(RDB)
-admin.site.register(MenuTable)
+admin.site.register(MenuTables)
+
