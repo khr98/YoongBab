@@ -70,12 +70,12 @@ def get_chaSeDae(request):
     #  오늘 기준으로
     # 호출한 요일 - 오늘 요일 값을 오늘날짜에 날짜 연산으로 더해주면됌
     # delta 는 오늘기준으로 사용자가 선택한요일의 차이값입니다
-   
+
 
     # selectedDay 는 사용자가 선택한 요일에 상응하는 날짜입니다
-   
 
-    
+
+
     if return_str == "차세대융합기술원" or return_str == "🚗🚗🚗차세대융합기술원":
 
         if is_holiday():
@@ -98,10 +98,10 @@ def get_chaSeDae(request):
         response = makeWeekendReply("차세대융합기술원", response)
 
         return JsonResponse(response)
-    
+
     elif return_str == "CSO" or return_str == "cso":
         text = "원하시는 기능의 버튼을 클릭해주세요!"
-        
+
         menu = ChaSeDae.objects.filter(date=date.today())[0]
         print(menu.moms.find("품절"))
         response =  insert_text(text)
@@ -119,13 +119,13 @@ def get_chaSeDae(request):
             response = insert_replies(response,reply)
         if (menu.special.find("품절") == -1):
             reply = make_reply("정찬품절","차세대융합기술원정찬품절")
-            response = insert_replies(response,reply) 
+            response = insert_replies(response,reply)
         else:
             reply = make_reply("정찬품절해제","차세대융합기술원정찬품절")
             response = insert_replies(response,reply)
-        
+
         return JsonResponse(response)
-    
+
     elif return_str == "차세대융합기술원맘스품절":
         text = "차세대융합기술원 맘스 메뉴가 품절되었습니다"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
@@ -133,7 +133,7 @@ def get_chaSeDae(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
+
     elif return_str == "차세대융합기술원셰프품절":
         text = "차세대융합기술원 셰프 메뉴가 품절되었습니다"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
@@ -141,7 +141,7 @@ def get_chaSeDae(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-        
+
     elif return_str == "차세대융합기술원정찬품절":
         text = "차세대융합기술원 정찬 메뉴가 품절되었습니다"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
@@ -149,7 +149,7 @@ def get_chaSeDae(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
+
     elif return_str == "차세대융합기술원맘스품절해제":
         text = "차세대융합기술원 맘스 메뉴 품절이 해제되었습니다"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
@@ -157,8 +157,8 @@ def get_chaSeDae(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
-    
+
+
     elif return_str == "차세대융합기술원셰프품절해제":
         text = "차세대융합기술원 셰프 메뉴 품절이 해제되었습니다"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
@@ -166,8 +166,8 @@ def get_chaSeDae(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
-        
+
+
     elif return_str == "차세대융합기술원정찬품절해제":
         text = "차세대융합기술원 셰프 메뉴 품절이 해제되었습니다"
         menu = ChaSeDae.objects.filter(date=date.today())[0]
@@ -175,15 +175,15 @@ def get_chaSeDae(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-        
-        
+
+
     elif return_str == "차세대융합기술원문의사항":
         text = "📪 문의사항 : 우혜림 영양사 [prefla@naver.com] \n" \
                "031-888-9497 로 연락 바랍니다."
         response = insert_text(text)
         response = makeWeekendReply("차세대융합기술원", response)
         return JsonResponse(response)
-    
+
     elif return_str == "차세대융합기술원식단표":
         delta = weekConverter("월") - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
@@ -192,14 +192,14 @@ def get_chaSeDae(request):
         response = insert_image(table, text)
         response = makeWeekendReply("차세대융합기술원", response)
         return JsonResponse(response)
-    
+
     else:
         delta = weekConverter(return_str) - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
         menu = ChaSeDae.objects.filter(date=selectedDay)[0]
         text = selectedDay.strftime('%m-%d')
         text += " 차세대융합기술원식단\n\n"
-        
+
         text += menuFormat("[맘스]", menu.moms)
         text += menuFormat("[셰프]", menu.chef)
         text += menuFormat("[정찬]", menu.special)
@@ -211,7 +211,7 @@ def get_chaSeDae(request):
         response = makeWeekendReply("차세대융합기술원", response)
         return JsonResponse(response)
 
-    
+
 
 
 @csrf_exempt
@@ -226,7 +226,7 @@ def get_nano(request):
             response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
             response = makeWeekendReply("한국나노기술원", response)
             return JsonResponse(response)
-        
+
         try:
             menu = Nano.objects.filter(date=date.today())[0]
             text = "품절 확인 기능이 추가되었습니다\n실시간으로 업데이트됩니다\n식당 방문전 확인 부탁드립니다🤩\n오늘 한국나노기술원 식단\n\n"
@@ -245,10 +245,10 @@ def get_nano(request):
             response = insert_text("아직 식단이 제공되지 않았어요!")
             response = makeWeekendReply("한국나노기술원", response)
             return JsonResponse(response)
-    
+
     elif return_str == "NSO" or return_str == "nso":
         text = "원하시는 기능의 버튼을 클릭해주세요!"
-        
+
         menu = Nano.objects.filter(date=date.today())[0]
         response =  insert_text(text)
         if (menu.lunchA.find("품절") == -1):
@@ -263,9 +263,9 @@ def get_nano(request):
         else:
             reply = make_reply("B코너품절해제","한국나노기술원B코너품절해제")
             response = insert_replies(response,reply)
-        
+
         return JsonResponse(response)
-    
+
     elif return_str == "한국나노기술원A코너품절":
         text = "한국나노기술원 A코스가 품절되었습니다"
         menu = Nano.objects.filter(date=date.today())[0]
@@ -273,7 +273,7 @@ def get_nano(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
+
     elif return_str == "한국나노기술원B코너품절":
         text = "한국나노기술원 B코스가 품절되었습니다"
         menu = Nano.objects.filter(date=date.today())[0]
@@ -281,7 +281,7 @@ def get_nano(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
+
     elif return_str == "한국나노기술원A코너품절해제":
         text = "한국나노기술원 A코너 품절이 해제되었습니다"
         menu = Nano.objects.filter(date=date.today())[0]
@@ -289,8 +289,8 @@ def get_nano(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
-    
+
+
     elif return_str == "한국나노기술원B코너품절해제":
         text = "한국나노기술원 B코너 품절이 해제되었습니다"
         menu = Nano.objects.filter(date=date.today())[0]
@@ -298,7 +298,7 @@ def get_nano(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
+
     elif return_str == "한국나노기술원문의사항":
         text = "⏰ 운영시간안내\n- 중식 11:30 ~ 13:10\n" \
                "- 석식 17:30 ~ 18:30\n\n" \
@@ -312,24 +312,24 @@ def get_nano(request):
         response = insert_text(text)
         response = makeWeekendReply("한국나노기술원", response)
         return JsonResponse(response)
-    
+
     else:
         delta = weekConverter(return_str) - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
         try:
             menu = Nano.objects.filter(date=selectedDay)[0]
-            
+
             text = selectedDay.strftime('%m-%d')
             text += " 한국나노기술원식단\n\n"
-                
+
             text += menuFormat("[정성이 가득한 점심 A코너]", menu.lunchA)
             text += menuFormat("[정성이 가득한 점심 B코너]", menu.lunchB)
             text += menuFormat("[PLUS]", menu.plus)
             text += menuFormat("[하루를 마무리 하는 저녁]", menu.dinner)
-                
+
             response = insert_text(text)
             response = makeWeekendReply("한국나노기술원", response)
-        
+
             return JsonResponse(response)
         except:
             text = selectedDay.strftime('%m-%d')
@@ -338,13 +338,13 @@ def get_nano(request):
             response = makeWeekendReply("한국나노기술원", response)
             return JsonResponse(response)
 
-        
-    
-           
-       
-        
 
-    
+
+
+
+
+
+
 
 
 @csrf_exempt
@@ -376,7 +376,7 @@ def get_R_DB(request):
 
     elif return_str == "RSO" or return_str == "rso":
         text = "원하시는 기능의 버튼을 클릭해주세요!"
-        
+
         menu = RDB.objects.filter(date=date.today())[0]
         response =  insert_text(text)
         if (menu.korea.find("품절") == -1):
@@ -391,9 +391,9 @@ def get_R_DB(request):
         else:
             reply = make_reply("일품품절해제","경기 RDB일품품절해제")
             response = insert_replies(response,reply)
-        
+
         return JsonResponse(response)
-    
+
     elif return_str == "경기 RDB한식품절":
         text = "경기 RDB 한식메뉴가 품절되었습니다"
         menu = RDB.objects.filter(date=date.today())[0]
@@ -401,7 +401,7 @@ def get_R_DB(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
+
     elif return_str == "경기 RDB일품품절":
         text = "경기 RDB 일품메뉴가 품절되었습니다"
         menu = RDB.objects.filter(date=date.today())[0]
@@ -409,7 +409,7 @@ def get_R_DB(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-        
+
     elif return_str == "경기 RDB한식품절해제":
         text = "경기 RDB 한식메뉴 품절이 해제되었습니다"
         menu = RDB.objects.filter(date=date.today())[0]
@@ -417,8 +417,8 @@ def get_R_DB(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
-        
+
+
     elif return_str == "경기 RDB일품품절해제":
         text = "경기 RDB 일품메뉴 품절이 해제되었습니다"
         menu = RDB.objects.filter(date=date.today())[0]
@@ -426,33 +426,33 @@ def get_R_DB(request):
         menu.save()
         response = insert_text(text)
         return JsonResponse(response)
-    
+
     elif return_str == "경기 RDB문의사항":
         text = "📪 문의사항 : 조혜성 영양사 [hyeseong92@daum.net] \n" \
                "010-3168-9547 로 연락 바랍니다."
         response = insert_text(text)
         response = makeWeekendReply("경기 RDB", response)
         return JsonResponse(response)
-    
+
     else:
         delta = weekConverter(return_str) - datetime.datetime.today().weekday()
         selectedDay = date.today() + timedelta(days=delta)
         menu = RDB.objects.filter(date=selectedDay)[0]
         text = selectedDay.strftime('%m-%d')
         text += " 경기 RDB 식단\n\n"
-        
+
         text += menuFormat("[한식]", menu.korea)
         text += menuFormat("[일품]", menu.special)
         text += menuFormat("[점심 플러스바]", menu.lunch_plus)
         text += menuFormat("[석식]", menu.dinner)
         text += menuFormat("[저녁 플러스바]", menu.dinner_plus)
         text += menuFormat("[TaktOut]", menu.takeOut)
-        
+
         response = insert_text(text)
         response = makeWeekendReply("경기 RDB", response)
         return JsonResponse(response)
 
-    
+
 @csrf_exempt
 def get_etc(request):
     answer = request.body.decode('utf-8')
@@ -480,33 +480,80 @@ def add_rdb(request):
     a = 65
     a = "D4"
     for i in range(68, 73):
-        
+
         tempKorea = load_ws[chr(i)+'4'].value + "," + load_ws[chr(i)+'5'].value +"," + load_ws[chr(i)+'6'].value + "," + load_ws[chr(i)+'7'].value + "," + load_ws[chr(i)+'8'].value +  "," + load_ws[chr(i)+'9'].value
         tempSpecial = load_ws[chr(i)+'10'].value + "," + load_ws[chr(i)+'11'].value +"," + load_ws[chr(i)+'12'].value + "," + load_ws[chr(i)+'13'].value + "," + load_ws[chr(i)+'14'].value +  "," + load_ws[chr(i)+'15'].value
         tempLunchPlus = load_ws[chr(i)+'16'].value + "," + load_ws[chr(i)+'17'].value +"," + load_ws[chr(i)+'18'].value +"," + load_ws[chr(i)+'19'].value
         tempDinner = load_ws[chr(i)+'20'].value + "," + load_ws[chr(i)+'21'].value +"," + load_ws[chr(i)+'22'].value +"," + load_ws[chr(i)+'23'].value + load_ws[chr(i)+'24'].value
         tempDinnerPlus = load_ws[chr(i)+'25'].value + "," + load_ws[chr(i)+'26'].value +"," + load_ws[chr(i)+'27'].value
         tempTakeOut = load_ws[chr(i)+'28'].value + "," + load_ws[chr(i)+'29'].value
-        print(tempTakeOut);
         RDB.objects.create(date=load_ws[chr(i)+'3'].value,korea=tempKorea,special=tempSpecial,lunch_plus=tempLunchPlus,dinner=tempDinner,dinner_plus=tempDinnerPlus,takeOut=tempTakeOut)
     text = ""
     response = insert_text(text)
     return JsonResponse(response)
 
+def xstr(s):
+    return '' if s is None else str(s)
 
 def uploadFile(request):
-    print("업로드하자")
     if request.method == "POST":
         # Fetching the form data
         fileTitle = request.POST["fileTitle"]
         uploadedFile = request.FILES["uploadedFile"]
+        if fileTitle == "rdb":
+            load_wb = load_workbook(uploadedFile, data_only=True)
+            load_ws = load_wb['경기알앤디비']
+            for i in range(68, 73):
+                tempKorea = load_ws[chr(i) + '4'].value + "," + load_ws[chr(i) + '5'].value + "," + load_ws[
+                    chr(i) + '6'].value + "," + load_ws[chr(i) + '7'].value + "," + load_ws[chr(i) + '8'].value + "," + \
+                            load_ws[chr(i) + '9'].value
+                tempSpecial = load_ws[chr(i) + '10'].value + "," + load_ws[chr(i) + '11'].value + "," + load_ws[
+                    chr(i) + '12'].value + "," + load_ws[chr(i) + '13'].value + "," + load_ws[chr(i) + '14'].value + "," + \
+                              load_ws[chr(i) + '15'].value
+                tempLunchPlus = load_ws[chr(i) + '16'].value + "," + load_ws[chr(i) + '17'].value + "," + load_ws[
+                    chr(i) + '18'].value + "," + load_ws[chr(i) + '19'].value
+                tempDinner = load_ws[chr(i) + '20'].value + "," + load_ws[chr(i) + '21'].value + "," + load_ws[
+                    chr(i) + '22'].value + "," + load_ws[chr(i) + '23'].value + load_ws[chr(i) + '24'].value
+                tempDinnerPlus = load_ws[chr(i) + '25'].value + "," + load_ws[chr(i) + '26'].value + "," + load_ws[
+                    chr(i) + '27'].value
+                tempTakeOut = load_ws[chr(i) + '28'].value + "," + load_ws[chr(i) + '29'].value
+                RDB.objects.create(date=load_ws[chr(i) + '3'].value, korea=tempKorea, special=tempSpecial,
+                                   lunch_plus=tempLunchPlus, dinner=tempDinner, dinner_plus=tempDinnerPlus,
+                                   takeOut=tempTakeOut)
+        elif fileTitle == "cha":
+            load_wb = load_workbook(uploadedFile, data_only=True)
+            load_ws = load_wb['융기원']
+            for i in range(68, 73):
+                tempMoms = load_ws[chr(i) + '4'].value + "," + load_ws[chr(i) + '5'].value + "," + load_ws[
+                    chr(i) + '6'].value + "," + load_ws[chr(i) + '7'].value + "," + load_ws[chr(i) + '8'].value + "," + \
+                            load_ws[chr(i) + '9'].value
+                tempChef = load_ws[chr(i) + '10'].value + "," + load_ws[chr(i) + '11'].value + "," + load_ws[
+                    chr(i) + '12'].value + "," + load_ws[chr(i) + '13'].value + "," + load_ws[chr(i) + '14'].value + "," + \
+                              load_ws[chr(i) + '15'].value
+                tempSalad = load_ws[chr(i) + '16'].value + "," + load_ws[chr(i) + '17'].value + "," + load_ws[
+                    chr(i) + '18'].value
+                tempSpecial = load_ws[chr(i) + '19'].value + "," + load_ws[chr(i) + '20'].value + "," + load_ws[
+                    chr(i) + '21'].value + "," + load_ws[chr(i) + '22'].value + "," + load_ws[chr(i) + '23'].value + "," + load_ws[chr(i) + '24'].value + "," + load_ws[chr(i) + '25'].value + "," + load_ws[chr(i) + '26'].value
+                tempDinner = load_ws[chr(i) + '27'].value + "," + load_ws[chr(i) + '28'].value + "," + load_ws[
+                    chr(i) + '29'].value + "," + load_ws[chr(i) + '30'].value + load_ws[chr(i) + '31'].value + load_ws[chr(i) + '32'].value
+                tempTakeOut = load_ws[chr(i) + '33'].value + "," + load_ws[chr(i) + '34'].value + "," + load_ws[chr(i) + '35'].value
+                ChaSeDae.objects.create(date=load_ws[chr(i) + '3'].value, moms=tempMoms, chef=tempChef,
+                                   special=tempSpecial, salad=tempSalad, dinner=tempDinner,
+                                   takeOut=tempTakeOut)
 
-        # Saving the information in the database
-        document = Document(
-            title=fileTitle,
-            uploadedFile=uploadedFile
-        )
-        document.save()
+        elif fileTitle == "nano":
+            load_wb = load_workbook(uploadedFile, data_only=True)
+            load_ws = load_wb['주간식단표']
+            # 메뉴의 숫자가 딱 안맞을 경우에 None 타입이 나오게 되고 None 타입과 String 붙히려면 오류나서 각 메뉴의 멘 마지막 행은 예외처리해줌
+            for i in range(66, 71):
+                tempLunchA = load_ws[chr(i) + '5'].value + "," + load_ws[chr(i) + '6'].value + "," + load_ws[chr(i) + '7'].value + "," + load_ws[chr(i) + '8'].value + "," + load_ws[chr(i) + '9'].value + "," + xstr(load_ws[chr(i) + '10'].value)
+                tempLunchB = load_ws[chr(i) + '11'].value + "," + load_ws[chr(i) + '12'].value + "," + load_ws[chr(i) + '13'].value + "," + load_ws[chr(i) + '14'].value + "," +  xstr(load_ws[chr(i) + '15'].value)
+                tempPlus = load_ws[chr(i) + '16'].value
+
+                tempDinner = load_ws[chr(i) + '17'].value + "," + load_ws[chr(i) + '18'].value + "," + load_ws[chr(i) + '19'].value + "," + load_ws[chr(i) + '20'].value + "," + load_ws[chr(i) + '21'].value + "," + xstr(load_ws[chr(i) + '22'].value)
+
+                Nano.objects.create(date=load_ws[chr(i) + '4'].value, lunchA=tempLunchA, lunchB=tempLunchB,
+                                   plus=tempPlus, dinner=tempDinner)
 
     documents = Document.objects.all()
 
