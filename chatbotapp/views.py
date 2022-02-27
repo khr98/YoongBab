@@ -518,6 +518,8 @@ def uploadFile(request):
             load_wb = load_workbook(uploadedFile, data_only=True)
             load_ws = load_wb['경기알앤디비']
             for i in range(68, 73):
+                if (load_ws[chr(i) + '4'].value == None or load_ws[chr(i) + '5'].value == None):
+                    continue;
                 tempKorea = load_ws[chr(i) + '4'].value + "," + load_ws[chr(i) + '5'].value + "," + load_ws[
                     chr(i) + '6'].value + "," + load_ws[chr(i) + '7'].value + "," + load_ws[chr(i) + '8'].value + "," + \
                             load_ws[chr(i) + '9'].value
@@ -538,6 +540,8 @@ def uploadFile(request):
             load_wb = load_workbook(uploadedFile, data_only=True)
             load_ws = load_wb['융기원']
             for i in range(68, 73):
+                if (load_ws[chr(i) + '4'].value == None or load_ws[chr(i) + '5'].value == None):
+                    continue;
                 tempMoms = load_ws[chr(i) + '4'].value + "," + load_ws[chr(i) + '5'].value + "," + load_ws[
                     chr(i) + '6'].value + "," + load_ws[chr(i) + '7'].value + "," + load_ws[chr(i) + '8'].value + "," + \
                             load_ws[chr(i) + '9'].value
@@ -560,6 +564,8 @@ def uploadFile(request):
             load_ws = load_wb['주간식단표']
             # 메뉴의 숫자가 딱 안맞을 경우에 None 타입이 나오게 되고 None 타입과 String 붙히려면 오류나서 각 메뉴의 멘 마지막 행은 예외처리해줌
             for i in range(66, 71):
+                if (load_ws[chr(i) + '5'].value == None or load_ws[chr(i) + '6'].value == None):
+                    continue;
                 tempLunchA = load_ws[chr(i) + '5'].value + "," + load_ws[chr(i) + '6'].value + "," + load_ws[chr(i) + '7'].value + "," + load_ws[chr(i) + '8'].value + "," + load_ws[chr(i) + '9'].value + "," + xstr(load_ws[chr(i) + '10'].value)
                 tempLunchB = load_ws[chr(i) + '11'].value + "," + load_ws[chr(i) + '12'].value + "," + load_ws[chr(i) + '13'].value + "," + load_ws[chr(i) + '14'].value + "," +  xstr(load_ws[chr(i) + '15'].value)
                 tempPlus = load_ws[chr(i) + '16'].value
