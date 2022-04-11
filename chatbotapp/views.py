@@ -554,7 +554,12 @@ def uploadFile(request):
                     chr(i) + '21'].value + "," + load_ws[chr(i) + '22'].value + "," + load_ws[chr(i) + '23'].value + "," + load_ws[chr(i) + '24'].value + "," + load_ws[chr(i) + '25'].value + "," + load_ws[chr(i) + '26'].value
                 tempDinner = load_ws[chr(i) + '27'].value + "," + load_ws[chr(i) + '28'].value + "," + load_ws[
                     chr(i) + '29'].value + "," + load_ws[chr(i) + '30'].value + load_ws[chr(i) + '31'].value + load_ws[chr(i) + '32'].value
-                tempTakeOut = load_ws[chr(i) + '33'].value + "," + load_ws[chr(i) + '34'].value + "," + load_ws[chr(i) + '35'].value
+                try:
+                    tempTakeOut = load_ws[chr(i) + '33'].value + "," + load_ws[chr(i) + '34'].value + "," + load_ws[chr(i) + '35'].value
+                except:
+                    tempTakeOut = load_ws[chr(i) + '33'].value + "," + load_ws[chr(i) + '34'].value + "," + load_ws[chr(68) + '35'].value
+            
+                
                 ChaSeDae.objects.create(date=load_ws[chr(i) + '3'].value, moms=tempMoms, chef=tempChef,
                                    special=tempSpecial, salad=tempSalad, dinner=tempDinner,
                                    takeOut=tempTakeOut)
