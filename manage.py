@@ -4,6 +4,9 @@ import os
 import sys
 
 
+import dotenv
+dotenv.read_dotenv()
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'yoongBab.settings')
