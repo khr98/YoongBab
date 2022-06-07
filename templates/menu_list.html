@@ -1,17 +1,18 @@
 {% extends "base.html" %} {% block content %} {%for menu in menus %}
-<h2>맘스: {{ menu.moms }}</h2>
-<h2>셰프: {{ menu.chef }}</h2>
-<h2>정찬: {{ menu.special }}</h2>
-<h2>샐러드: {{ menu.salad }}</h2>
+<h2>한식: {{ menu.korea }}</h2>
+<h2>일품: {{ menu.special }}</h2>
+<h2>점심 플러스바: {{ menu.lunch_plus }}</h2>
 <h2>석식: {{ menu.dinner }}</h2>
+<h2>석식 플러스바: {{ menu.dinner_plus }}</h2>
 <h2>Take Out: {{ menu.takeOut }}</h2>
-<h2>식단표사진: {{menu.img}}</h2>
 <h2>Date : {{menu.date}}</h2>
 {% endfor %}
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"
+></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
@@ -20,7 +21,5 @@
     await axios.post(url, {});
   };
 </script>
-
-
 
 {% endblock %}

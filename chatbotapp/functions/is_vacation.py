@@ -4,6 +4,8 @@ import datetime
 
 holiday_list = pytimekr.holidays() #holidays메소드는 리스트 형태로 관련값 반환
 
+print(holiday_list)
+
 def is_holiday():
     result = False;
     weekno = datetime.datetime.today().weekday()
@@ -13,3 +15,5 @@ def is_holiday():
         else:
             pass;
     return(result);
+
+

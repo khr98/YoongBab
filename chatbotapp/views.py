@@ -1,6 +1,7 @@
 import datetime
 from urllib import response
-from django.shortcuts import render, redirect
+from uuid import RFC_4122
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from chatbotapp.functions.menuFormatting import makeWeekendReply, menuFormat
@@ -16,8 +17,13 @@ from openpyxl import load_workbook
 
 @csrf_exempt
 def menu_list(request):
-    menus = ChaSeDae.objects.all();
-    return render(request, template_name='menu_list.html', context={'menus': menus})
+    try:
+        menus = RDB.objects.filter(date=date.today())[0]
+        return render(request, template_name='menu_list.html', context={'menus': menus})
+    except:
+        menus = RDB.objects.all()
+        return render(request,template_name='menu_list.html',context={'menus': menus})
+    
 
 
 @csrf_exempt
@@ -360,13 +366,20 @@ def get_R_DB(request):
     return_str = return_json_str['userRequest']['utterance']
 
     if return_str == "경기 RDB" or return_str == "🍙경기 RDB":
+        
         if is_holiday():
             response = insert_text("공휴일에는 식단을 제공하지 않습니다😊\n행복한 하루 되세요")
             response = makeWeekendReply("경기 RDB", response)
             return JsonResponse(response)
         text = "품절 확인 기능이 추가되었습니다\n실시간으로 업데이트됩니다\n식당 방문전 확인 부탁드립니다🤩\n오늘 경기RDB 식단\n\n"
-        menu = RDB.objects.filter(date=date.today())[0]
-
+        try:
+            menu = RDB.objects.filter(date=date.today())[0]
+        except:
+            response = insert_text("이번주 식단이 아직 도착하지 않았어요, 최대한 빨리 업데이트 하겠습니다.")
+            response = makeWeekendReply("경기 RDB", response)
+            return JsonResponse(response)
+        
+        
         text += menuFormat("[한식]", menu.korea)
         text += menuFormat("[일품]", menu.special)
         text += menuFormat("[점심 플러스바]", menu.lunch_plus)
@@ -537,6 +550,7 @@ def uploadFile(request):
                                    lunch_plus=tempLunchPlus, dinner=tempDinner, dinner_plus=tempDinnerPlus,
                                    takeOut=tempTakeOut)
         elif fileTitle == "cha":
+            prev = 68
             load_wb = load_workbook(uploadedFile, data_only=True)
             load_ws = load_wb['융기원']
             for i in range(68, 73):
@@ -554,12 +568,13 @@ def uploadFile(request):
                     chr(i) + '21'].value + "," + load_ws[chr(i) + '22'].value + "," + load_ws[chr(i) + '23'].value + "," + load_ws[chr(i) + '24'].value + "," + load_ws[chr(i) + '25'].value + "," + load_ws[chr(i) + '26'].value
                 tempDinner = load_ws[chr(i) + '27'].value + "," + load_ws[chr(i) + '28'].value + "," + load_ws[
                     chr(i) + '29'].value + "," + load_ws[chr(i) + '30'].value + load_ws[chr(i) + '31'].value + load_ws[chr(i) + '32'].value
+                if (load_ws[chr(i) + '35'].value != None):
+                    prev = i;
                 try:
                     tempTakeOut = load_ws[chr(i) + '33'].value + "," + load_ws[chr(i) + '34'].value + "," + load_ws[chr(i) + '35'].value
-                except:
-                    tempTakeOut = load_ws[chr(i) + '33'].value + "," + load_ws[chr(i) + '34'].value + "," + load_ws[chr(68) + '35'].value
+                except: 
+                    tempTakeOut = load_ws[chr(i) + '33'].value + "," + load_ws[chr(i) + '34'].value + "," + load_ws[chr(prev) + '35'].value
             
-                
                 ChaSeDae.objects.create(date=load_ws[chr(i) + '3'].value, moms=tempMoms, chef=tempChef,
                                    special=tempSpecial, salad=tempSalad, dinner=tempDinner,
                                    takeOut=tempTakeOut)
